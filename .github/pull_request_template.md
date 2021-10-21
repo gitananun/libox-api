@@ -1,6 +1,6 @@
 ## TASK_TITLE
 ---------
-TITLE_DESCRIPTION
+TASK_DESCRIPTION
 
 ### Progress
 - [ ] TASK_1 
