@@ -1097,7 +1097,7 @@ header .edu_nav nav {
     padding: 0;
 }
 header .edu_nav nav .navbar-brand img {
-    width: auto;
+    width: 200px;
 }
 header .edu_nav nav .navbar-nav li {
     position: relative;
