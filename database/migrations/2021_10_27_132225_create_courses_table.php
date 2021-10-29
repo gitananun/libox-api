@@ -23,6 +23,8 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->timestamp('last_updated');
             $table->timestamps();
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 

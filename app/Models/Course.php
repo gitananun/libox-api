@@ -11,11 +11,12 @@ class Course extends Model
 
     protected $fillable = [
         'title',
-        'description',
         'rating',
         'price',
         'length',
+        'user_id',
         'language',
+        'description',
         'last_updated',
     ];
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -29,6 +30,7 @@ class CourseFactory extends Factory
             'language' => $this->faker->languageCode(),
             'description' => $this->faker->text(),
             'last_updated' => $this->faker->dateTime(),
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }

@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'lastname' => $this->lastname,
             'email' => $this->email,
+            'role' => $this->role,
             'date_of_birth' => $this->date_of_birth,
             'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at,
