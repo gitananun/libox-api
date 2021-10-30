@@ -28,6 +28,7 @@ class AuthController extends Controller
             return response()->message('Invalid login credentials', 401);
         }
 
+        $this->authService->logout();
         $token = $this->authService->login($request['email']);
 
         return response()->success(['access_token' => $token, 'token_type' => 'Bearer']);

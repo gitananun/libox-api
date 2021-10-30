@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::get('self', [AuthController::class, 'self']);
         Route::post('logout', [AuthController::class, 'logout']);
+    });
+
+    Route::prefix('courses')->group(function () {
+        Route::get('/', [CourseController::class, 'index']);
     });
 });

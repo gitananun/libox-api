@@ -29,10 +29,6 @@ class AuthService
 
     public function logout(): void
     {
-        /**
-         * @var \App\Models\User $user
-         */
-        $user = auth()->user();
-        $user->tokens()->delete();
+        User::auth()->tokens()->delete();
     }
 }

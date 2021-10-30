@@ -29,4 +29,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Course::class);
     }
+
+    public static function auth(): ?User
+    {
+        return auth()->user();
+    }
 }
