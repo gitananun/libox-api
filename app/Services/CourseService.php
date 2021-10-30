@@ -11,4 +11,10 @@ class CourseService
     {
         return User::auth()->courses()->get();
     }
+
+    public function store(array $data): void
+    {
+        $user = User::auth();
+        $user->courses()->create($data);
+    }
 }

@@ -16,6 +16,7 @@ class CourseResource extends JsonResource
     {
         return [
             "id" => $this->id,
+            "slug" => $this->slug,
             "title" => $this->title,
             "rating" => $this->rating,
             "price" => $this->price,

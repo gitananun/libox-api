@@ -28,5 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('courses')->group(function () {
         Route::get('/', [CourseController::class, 'index']);
+        Route::post('/', [CourseController::class, 'store']);
     });
 });

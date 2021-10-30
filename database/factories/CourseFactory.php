@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Course;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CourseFactory extends Factory
@@ -23,7 +24,8 @@ class CourseFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->name(),
+            'title' => $title = $this->faker->name(),
+            'slug' => Str::slug($title),
             'rating' => $this->faker->numberBetween(1, 5),
             'price' => $this->faker->numberBetween(0, 100),
             'length' => $this->faker->numberBetween(1, 45),

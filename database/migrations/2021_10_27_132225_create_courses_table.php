@@ -16,12 +16,13 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->float('rating');
-            $table->float('price');
-            $table->float('length');
+            $table->text('slug');
+            $table->float('rating')->nullable();
+            $table->float('price')->nullable();
+            $table->float('length')->nullable();
             $table->string('language');
             $table->text('description');
-            $table->timestamp('last_updated');
+            $table->timestamp('last_updated')->nullable();
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
