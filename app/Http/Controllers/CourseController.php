@@ -18,6 +18,8 @@ class CourseController extends Controller
 
     public function store(StoreCourseRequest $request)
     {
+        $this->authorize('email_verified');
+
         $this->courseService->store($request->all());
 
         return response()->stored();
