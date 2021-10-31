@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 
 /*
@@ -24,6 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::get('self', [AuthController::class, 'self']);
         Route::post('logout', [AuthController::class, 'logout']);
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::delete('/', [UserController::class, 'delete']);
     });
 
     Route::prefix('courses')->group(function () {
