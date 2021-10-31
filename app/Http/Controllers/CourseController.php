@@ -29,7 +29,6 @@ class CourseController extends Controller
 
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        $this->authorize('email_verified');
         $this->authorize('update', $course);
 
         $this->courseService->update($request->all(), $course);
