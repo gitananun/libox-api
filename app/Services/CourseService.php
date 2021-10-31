@@ -23,4 +23,9 @@ class CourseService
     {
         $course->update($data);
     }
+
+    public function delete(Course $course): void
+    {
+        $course->delete();
+    }
 }

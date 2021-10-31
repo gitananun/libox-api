@@ -35,4 +35,13 @@ class CourseController extends Controller
 
         return response()->stored();
     }
+
+    public function delete(Course $course)
+    {
+        $this->authorize('delete', $course);
+
+        $this->courseService->delete($course);
+
+        return response()->deleted();
+    }
 }

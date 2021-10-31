@@ -38,6 +38,13 @@ class AppServiceProvider extends ServiceProvider
             ], 200)
         );
 
+        Response::macro('deleted', fn() =>
+            Response::make([
+                'success' => true,
+                'body' => 'Data deleted successfully',
+            ], 200)
+        );
+
         Response::macro('message', fn($value, $statusCode = 200) =>
             Response::make([
                 'success' => $statusCode >= 200 && $statusCode <= 299 ? true : false,
