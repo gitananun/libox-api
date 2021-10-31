@@ -44,4 +44,9 @@ class CourseController extends Controller
 
         return response()->deleted();
     }
+
+    public function show(Course $course)
+    {
+        return response()->success(new CourseResource($course));
+    }
 }
