@@ -17,4 +17,15 @@ class CourseObserver
     {
         $course->slug = Str::slug($course->title);
     }
+
+    /**
+     * Handle the Course "update" event.
+     *
+     * @param  \App\Models\Course $course
+     * @return void
+     */
+    public function updating(Course $course)
+    {
+        $course->slug = Str::slug($course->title);
+    }
 }

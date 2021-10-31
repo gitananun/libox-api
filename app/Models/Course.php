@@ -19,4 +19,9 @@ class Course extends Model
         'description',
         'last_updated',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
