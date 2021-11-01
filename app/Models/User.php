@@ -25,9 +25,21 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
+    protected $hidden = [
+        'email_verified_at',
+        'password',
+        'created_at',
+        'updated_at',
+    ];
+
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function providers(): HasMany
+    {
+        return $this->hasMany(Provider::class);
     }
 
     public static function auth(): ?User

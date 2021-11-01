@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Socialite;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Http\Resources\UserResource;
@@ -45,4 +46,15 @@ class AuthController extends Controller
         return response()->success(new UserResource($request->user()));
     }
 
+    public function redirectToProvider(string $provider)
+    {
+        return Socialite::driver($provider)->stateless()->redirect();
+    }
+
+    public function handleProviderCallback(string $provider)
+    {
+        $token = $this->authService->handleProviderCallback($provider);
+
+        return response()->success(['access_token' => $token, 'token_type' => 'Bearer']);
+    }
 }

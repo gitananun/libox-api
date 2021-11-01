@@ -18,7 +18,15 @@ use App\Http\Controllers\CourseController;
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
-    Route::post('login', [AuthController::class, 'login']);
+
+    Route::prefix('login')->group(function () {
+        Route::post('/', [AuthController::class, 'login']);
+
+        Route::prefix('{provider}')->middleware('provider.check')->group(function () {
+            Route::get('/', [AuthController::class, 'redirectToProvider']);
+            Route::get('callback', [AuthController::class, 'handleProviderCallback']);
+        });
+    });
 });
 
 Route::middleware('auth:sanctum')->group(function () {
