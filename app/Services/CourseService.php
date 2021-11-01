@@ -4,13 +4,13 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Course;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CourseService
 {
-    public function index(): Collection
+    public function index(): LengthAwarePaginator
     {
-        return User::auth()->courses()->get();
+        return User::auth()->courses()->paginate();
     }
 
     public function store(array $data): void

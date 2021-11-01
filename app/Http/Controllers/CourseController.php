@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Services\CourseService;
 use App\Http\Resources\CourseResource;
 use App\Http\Requests\StoreCourseRequest;
+use App\Http\Resources\PaginatorResource;
 use App\Http\Requests\UpdateCourseRequest;
 
 class CourseController extends Controller
@@ -15,7 +16,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        return response()->success(CourseResource::collection($this->courseService->index()));
+        return response()->success(new PaginatorResource($this->courseService->index()));
     }
 
     public function store(StoreCourseRequest $request)
