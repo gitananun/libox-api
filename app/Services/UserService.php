@@ -8,6 +8,9 @@ class UserService
 {
     public function delete(): void
     {
-        User::auth()->delete();
+        $user = User::auth();
+
+        $user->tokens()->delete();
+        $user->delete();
     }
 }
