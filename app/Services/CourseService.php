@@ -31,7 +31,7 @@ class CourseService
 
     public function search(string $title): LengthAwarePaginator
     {
-        return Course::where('title', 'LIKE', '%' . $title . '%')->paginate();
+        return User::auth()->courses()->where('title', 'LIKE', '%' . $title . '%')->paginate();
     }
 
     public function like(Course $course): void
