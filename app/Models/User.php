@@ -15,6 +15,8 @@ class User extends Authenticatable
     const ROLE_BASIC = "BASIC";
     const ROLE_STUDENT = "STUDENT";
 
+    const ROLES = [User::ROLE_ADMIN, User::ROLE_BASIC, User::ROLE_STUDENT];
+
     protected $fillable = [
         'name',
         'role',
@@ -45,5 +47,10 @@ class User extends Authenticatable
     public static function auth(): ?User
     {
         return auth()->user();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === $this::ROLE_ADMIN;
     }
 }

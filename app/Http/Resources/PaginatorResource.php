@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PaginatorResource extends JsonResource
 {
-    public function __construct(public LengthAwarePaginator $data)
+    public function __construct(public string $jsonResource, public LengthAwarePaginator $data)
     {}
 
     /**
@@ -23,7 +23,7 @@ class PaginatorResource extends JsonResource
             'perPage' => $this->data->perPage(),
             'lastPage' => $this->data->lastPage(),
             'currentPage' => $this->data->currentPage(),
-            'items' => CourseResource::collection($this->data->items()),
+            'items' => $this->jsonResource::collection($this->data->items()),
         ];
     }
 }

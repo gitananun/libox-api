@@ -33,5 +33,10 @@ class AuthServiceProvider extends ServiceProvider
                 ? Response::allow()
                 : Response::deny('Email is not verified')
         );
+
+        Gate::define('is_admin', fn(User $user) => $user->isAdmin()
+                ? Response::allow()
+                : Response::deny('Role permissions denied')
+        );
     }
 }

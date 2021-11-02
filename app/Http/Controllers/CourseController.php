@@ -16,7 +16,10 @@ class CourseController extends Controller
 
     public function index()
     {
-        return response()->success(new PaginatorResource($this->courseService->index()));
+        return response()->success(new PaginatorResource(
+            CourseResource::class,
+            $this->courseService->index()
+        ));
     }
 
     public function store(StoreCourseRequest $request)
@@ -53,6 +56,8 @@ class CourseController extends Controller
 
     public function search(string $title)
     {
-        return response()->success(new PaginatorResource($this->courseService->search($title)));
+        return response()->success(new PaginatorResource(
+            CourseResource::class, $this->courseService->search($title)
+        ));
     }
 }

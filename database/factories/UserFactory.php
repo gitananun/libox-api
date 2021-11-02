@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'email_verified_at' => $this->faker->dateTime(),
             'date_of_birth' => $this->faker->dateTime('-5 years'),
             'password' => $this->faker->password(),
-            'role' => $this->faker->randomElement([User::ROLE_ADMIN, User::ROLE_BASIC, User::ROLE_STUDENT]),
+            'role' => $this->faker->randomElement(User::ROLES),
         ];
     }
 }
