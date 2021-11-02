@@ -17,11 +17,6 @@ class Category extends Model
         'category_id',
     ];
 
-    public function getRouteKeyName(): string
-    {
-        return 'name';
-    }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(self::class, 'category_id');
@@ -35,5 +30,10 @@ class Category extends Model
     public function scopeParents(Builder $query): Builder
     {
         return $query->where('category_id', null);
+    }
+
+    public function isParent(): bool
+    {
+        return $this->category_id == null;
     }
 }
