@@ -50,4 +50,9 @@ class CourseController extends Controller
     {
         return response()->success(new CourseResource($course));
     }
+
+    public function search(string $title)
+    {
+        return response()->success(new PaginatorResource($this->courseService->search($title)));
+    }
 }

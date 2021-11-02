@@ -28,4 +28,9 @@ class CourseService
     {
         $course->delete();
     }
+
+    public function search(string $title): LengthAwarePaginator
+    {
+        return Course::where('title', 'LIKE', '%' . $title . '%')->paginate();
+    }
 }
