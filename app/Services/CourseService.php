@@ -33,4 +33,14 @@ class CourseService
     {
         return Course::where('title', 'LIKE', '%' . $title . '%')->paginate();
     }
+
+    public function like(Course $course): void
+    {
+        $course->increment('likes');
+    }
+
+    public function dislike(Course $course): void
+    {
+        $course->decrement('likes');
+    }
 }

@@ -43,9 +43,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('courses')->group(function () {
         Route::get('/', [CourseController::class, 'index']);
         Route::post('/', [CourseController::class, 'store']);
-        Route::get('{course}', [CourseController::class, 'show']);
-        Route::put('{course}', [CourseController::class, 'update']);
-        Route::delete('{course}', [CourseController::class, 'delete']);
         Route::get('search/{title}', [CourseController::class, 'search']);
+
+        Route::prefix('{course}')->group(function () {
+            Route::get('/', [CourseController::class, 'show']);
+            Route::put('/', [CourseController::class, 'update']);
+            Route::put('like', [CourseController::class, 'like']);
+            Route::put('dislike', [CourseController::class, 'dislike']);
+            Route::delete('/', [CourseController::class, 'delete']);
+        });
     });
 });

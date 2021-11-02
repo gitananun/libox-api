@@ -32,6 +32,7 @@ class CourseFactory extends Factory
             'language' => $this->faker->languageCode(),
             'description' => $this->faker->text(),
             'last_updated' => $this->faker->dateTime(),
+            'likes' => $this->faker->numberBetween(0, 300),
             'user_id' => User::factory()->create()->id,
         ];
     }

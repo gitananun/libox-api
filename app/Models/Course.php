@@ -16,6 +16,7 @@ class Course extends Model
         'length',
         'user_id',
         'language',
+        'likes',
         'description',
         'last_updated',
     ];

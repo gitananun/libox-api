@@ -60,4 +60,18 @@ class CourseController extends Controller
             CourseResource::class, $this->courseService->search($title)
         ));
     }
+
+    public function like(Course $course)
+    {
+        $this->courseService->like($course);
+
+        return response()->stored();
+    }
+
+    public function dislike(Course $course)
+    {
+        $this->courseService->dislike($course);
+
+        return response()->stored();
+    }
 }

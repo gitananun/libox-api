@@ -22,6 +22,7 @@ class CreateCoursesTable extends Migration
             $table->float('length')->nullable();
             $table->string('language');
             $table->text('description');
+            $table->integer('likes')->default(0);
             $table->timestamp('last_updated')->nullable();
             $table->timestamps();
 
