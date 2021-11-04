@@ -11,4 +11,9 @@ class CategoryService
     {
         return Category::paginate();
     }
+
+    public function show(Category $category): LengthAwarePaginator
+    {
+        return $category->courses()->paginate();
+    }
 }
