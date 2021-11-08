@@ -26,4 +26,9 @@ class CategoryService
     {
         $category->delete();
     }
+
+    public function store(array $data): void
+    {
+        Category::create($data);
+    }
 }

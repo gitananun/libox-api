@@ -7,6 +7,7 @@ use App\Services\CategoryService;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\PaginatorResource;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
@@ -32,7 +33,7 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $this->authorize('update', $category);
+        $this->authorize('is_admin');
 
         $this->categoryService->update($request->all(), $category);
 
@@ -41,10 +42,20 @@ class CategoryController extends Controller
 
     public function delete(Category $category)
     {
-        $this->authorize('delete', $category);
+        $this->authorize('is_admin');
 
         $this->categoryService->delete($category);
 
         return response()->deleted();
+    }
+
+    public function store(StoreCategoryRequest $request)
+    {
+        $this->authorize('is_admin');
+
+        $this->categoryService->store($request->all());
+
+        return response()->stored();
+
     }
 }
