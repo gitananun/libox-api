@@ -24,11 +24,6 @@ class Category extends Model
         return $this->belongsTo(self::class, 'category_id');
     }
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     public function categories(): HasMany
     {
         return $this->hasMany(self::class, 'category_id');
