@@ -4,19 +4,25 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Course;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CourseService
 {
+    private function getQuery(): Builder | HasMany
+    {
+        return ($auth = User::auth()) ? $auth->courses() : Course::query();
+    }
+
     public function index(): LengthAwarePaginator
     {
-        return User::auth()->courses()->paginate();
+        return $this->getQuery()->paginate();
     }
 
     public function store(array $data): void
     {
-        $user = User::auth();
-        $user->courses()->create($data);
+        User::auth()->courses()->create($data);
     }
 
     public function update(array $data, Course $course): void
@@ -31,7 +37,8 @@ class CourseService
 
     public function search(string $title): LengthAwarePaginator
     {
-        return User::auth()->courses()->where('title', 'LIKE', '%' . $title . '%')->paginate();
+
+        return $this->getQuery()->where('title', 'LIKE', '%' . $title . '%')->paginate();
     }
 
     public function like(Course $course): void

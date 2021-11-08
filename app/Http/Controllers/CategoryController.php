@@ -56,6 +56,5 @@ class CategoryController extends Controller
         $this->categoryService->store($request->all());
 
         return response()->stored();
-
     }
 }
