@@ -30,11 +30,9 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::prefix('auth')->group(function () {
-        Route::get('self', [AuthController::class, 'self']);
-        Route::post('logout', [AuthController::class, 'logout']);
-    });
+Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
+    Route::get('self', [AuthController::class, 'self']);
+    Route::post('logout', [AuthController::class, 'logout']);
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
@@ -46,8 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [CourseController::class, 'store']);
         Route::get('search/{title}', [CourseController::class, 'search']);
 
+        Route::get('{course:slug}', [CourseController::class, 'show']);
         Route::prefix('{course}')->group(function () {
-            Route::get('/', [CourseController::class, 'show']);
             Route::put('/', [CourseController::class, 'update']);
             Route::put('like', [CourseController::class, 'like']);
             Route::put('dislike', [CourseController::class, 'dislike']);

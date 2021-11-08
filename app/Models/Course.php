@@ -27,11 +27,6 @@ class Course extends Model
         'last_updated',
     ];
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
