@@ -52,6 +52,13 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
             Route::delete('/', [CourseController::class, 'delete']);
         });
     });
+
+    Route::prefix('categories')->group(function () {
+        Route::prefix('{category}')->group(function () {
+            Route::put('/', [CategoryController::class, 'update']);
+            Route::delete('/', [CategoryController::class, 'delete']);
+        });
+    });
 });
 
 Route::prefix('categories')->group(function () {

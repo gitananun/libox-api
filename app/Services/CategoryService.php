@@ -16,4 +16,14 @@ class CategoryService
     {
         return $category->courses()->paginate();
     }
+
+    public function update(array $data, Category $category): void
+    {
+        $category->update($data);
+    }
+
+    public function delete(Category $category): void
+    {
+        $category->delete();
+    }
 }

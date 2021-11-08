@@ -15,7 +15,7 @@ class StoreCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255|unique:courses,title',
+            'title' => 'required|string|max:255|unique:courses,title',
             'rating' => 'nullable|numeric|between:0.0,5.0',
             'price' => 'nullable|numeric|between:0.0,999.0',
             'length' => 'nullable|numeric|between:0.0,999.0',
