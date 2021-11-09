@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Exception\ClientException;
 
 class AuthService
@@ -39,7 +39,7 @@ class AuthService
         try {
             $user = Socialite::driver($provider)->stateless()->user();
         } catch (ClientException $_) {
-            return response()->message('Invalid credentials', 422);
+            return null;
         }
 
         $fullName = $user->getName();

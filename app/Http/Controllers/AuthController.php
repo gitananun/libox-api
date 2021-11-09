@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Socialite;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginAuthRequest;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Requests\RegisterAuthRequest;
 
 class AuthController extends Controller
@@ -55,6 +55,8 @@ class AuthController extends Controller
     {
         $token = $this->authService->handleProviderCallback($provider);
 
-        return response()->success(['access_token' => $token, 'token_type' => 'Bearer']);
+        return $token
+            ? response()->success(['access_token' => $token, 'token_type' => 'Bearer'])
+            : response()->message('Invalid credentials', 401);
     }
 }
