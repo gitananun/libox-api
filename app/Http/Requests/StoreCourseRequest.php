@@ -22,6 +22,9 @@ class StoreCourseRequest extends FormRequest
             'description' => 'required|min:20',
             'last_updated' => 'nullable|date',
             'language' => ['required', new LanguageCode],
+
+            'categories' => 'present|array|distinct',
+            'categories.*' => 'int|exists:categories,id',
         ];
     }
 }

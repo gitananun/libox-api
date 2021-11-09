@@ -22,6 +22,9 @@ class UpdateCourseRequest extends FormRequest
             'description' => 'nullable|min:20',
             'last_updated' => 'nullable|date',
             'language' => ['nullable', new LanguageCode],
+
+            'categories' => 'present|array|distinct',
+            'categories.*' => 'int|exists:categories,id',
         ];
     }
 }
