@@ -3,7 +3,8 @@
 namespace App\Observers;
 
 use App\Models\User;
-use App\Notifications\AccountRegistered;
+use App\Notifications\User\UserCreated;
+use App\Notifications\User\UserDeleted;
 
 class UserObserver
 {
@@ -15,6 +16,17 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->notify(new AccountRegistered);
+        $user->notify(new UserCreated);
+    }
+
+    /**
+     * Handle the User "deleted" event.
+     *
+     * @param  \App\Models\User $user
+     * @return void
+     */
+    public function deleted(User $user)
+    {
+        $user->notify(new UserDeleted);
     }
 }
