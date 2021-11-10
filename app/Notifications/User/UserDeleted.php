@@ -15,7 +15,7 @@ class UserDeleted extends Notification
 
     public function via(): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -30,5 +30,13 @@ class UserDeleted extends Notification
             ->action(__('mail.user_deleted.action'), url('/'))
             ->line(__('mail.user_deleted.gratitude', ['name' => $notifiable->name]))
             ->salutation(__('mail.user_deleted.salutation'));
+    }
+
+    /**
+     * @param \App\Models\User $notifiable
+     */
+    public function toDatabase($notifiable)
+    {
+        return [];
     }
 }
