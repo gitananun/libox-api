@@ -8,6 +8,8 @@ use App\Http\Resources\CourseResource;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Resources\PaginatorResource;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Http\Requests\RemoveFavoritesRequest;
+use App\Http\Requests\UpdateFavoritesRequest;
 
 class CourseController extends Controller
 {
@@ -73,5 +75,27 @@ class CourseController extends Controller
         $this->courseService->dislike($course);
 
         return response()->stored();
+    }
+
+    public function indexFavorites()
+    {
+        return response()->success(new PaginatorResource(
+            CourseResource::class,
+            $this->courseService->indexFavorites()
+        ));
+    }
+
+    public function addFavorites(UpdateFavoritesRequest $request)
+    {
+        $this->courseService->addFavorites($request->course_id);
+
+        return response()->stored();
+    }
+
+    public function removeFavorites(RemoveFavoritesRequest $request)
+    {
+        $this->courseService->removeFavorites($request->course_id);
+
+        return response()->deleted();
     }
 }

@@ -50,4 +50,19 @@ class CourseService
     {
         $course->decrement('likes');
     }
+
+    public function indexFavorites(): LengthAwarePaginator
+    {
+        return User::auth()->favoriteCourses()->paginate();
+    }
+
+    public function addFavorites(int $courseId): void
+    {
+        User::auth()->favoriteCourses()->syncWithoutDetaching([$courseId]);
+    }
+
+    public function removeFavorites(int $courseId): void
+    {
+        User::auth()->favoriteCourses()->detach([$courseId]);
+    }
 }

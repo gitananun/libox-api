@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Auth\Passwords\CanResetPassword as TraitCanResetPassword;
 
 class User extends Authenticatable implements CanResetPassword
@@ -55,5 +56,10 @@ class User extends Authenticatable implements CanResetPassword
     public function isAdmin(): bool
     {
         return $this->role === $this::ROLE_ADMIN;
+    }
+
+    public function favoriteCourses(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class, 'favorite_courses')->withTimestamps();
     }
 }

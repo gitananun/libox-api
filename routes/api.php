@@ -22,9 +22,11 @@ use App\Http\Controllers\NotificationController;
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
 
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
+
     Route::prefix('login')->group(function () {
         Route::post('/', [AuthController::class, 'login']);
-
         Route::prefix('{provider}')->middleware('provider.check')->group(function () {
             Route::get('/', [AuthController::class, 'redirectToProvider']);
             Route::get('callback', [AuthController::class, 'handleProviderCallback']);
@@ -50,6 +52,12 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
         Route::post('/', [CourseController::class, 'store']);
         Route::get('search/{title}', [CourseController::class, 'search']);
 
+        Route::prefix('favorites')->group(function () {
+            Route::get('/', [CourseController::class, 'indexFavorites']);
+            Route::put('/', [CourseController::class, 'addFavorites']);
+            Route::delete('/', [CourseController::class, 'removeFavorites']);
+        });
+
         Route::get('{course:slug}', [CourseController::class, 'show']);
         Route::prefix('{course}')->group(function () {
             Route::put('/', [CourseController::class, 'update']);
@@ -57,6 +65,7 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
             Route::put('dislike', [CourseController::class, 'dislike']);
             Route::delete('/', [CourseController::class, 'delete']);
         });
+
     });
 
     Route::prefix('categories')->group(function () {
@@ -73,9 +82,6 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
         Route::delete('{post}', [PostController::class, 'delete']);
     });
 });
-
-Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);
