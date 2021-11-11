@@ -38,7 +38,6 @@ class CourseService
 
     public function search(string $title): LengthAwarePaginator
     {
-
         return $this->getQuery()->where('title', 'LIKE', '%' . $title . '%')->paginate();
     }
 

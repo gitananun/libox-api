@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
@@ -65,6 +66,12 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
             Route::delete('/', [CategoryController::class, 'delete']);
         });
     });
+
+    Route::prefix('posts')->group(function () {
+        Route::post('/', [PostController::class, 'store']);
+        Route::put('{post}', [PostController::class, 'update']);
+        Route::delete('{post}', [PostController::class, 'delete']);
+    });
 });
 
 Route::prefix('categories')->group(function () {
@@ -76,4 +83,10 @@ Route::prefix('courses')->group(function () {
     Route::get('/', [CourseController::class, 'index']);
     Route::get('search/{title}', [CourseController::class, 'search']);
     Route::get('{course:slug}', [CourseController::class, 'show']);
+});
+
+Route::prefix('posts')->group(function () {
+    Route::get('/', [PostController::class, 'index']);
+    Route::get('search/{title}', [PostController::class, 'search']);
+    Route::get('{post:slug}', [PostController::class, 'show']);
 });

@@ -24,8 +24,7 @@ class CourseFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $title = $this->faker->name(),
-            'slug' => Str::slug($title),
+            'title' => $this->faker->name(),
             'rating' => $this->faker->numberBetween(1, 5),
             'price' => $this->faker->numberBetween(0, 100),
             'length' => $this->faker->numberBetween(1, 45),
