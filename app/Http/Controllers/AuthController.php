@@ -7,8 +7,11 @@ use App\Services\AuthService;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginAuthRequest;
+use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Requests\RegisterAuthRequest;
+use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\ForgotPasswordRequest;
 
 class AuthController extends Controller
 {
@@ -44,6 +47,26 @@ class AuthController extends Controller
     public function self(Request $request)
     {
         return response()->success(new UserResource($request->user()));
+    }
+
+    public function forgotPassword(ForgotPasswordRequest $request)
+    {
+        $status = $this->authService->forgotPassword($request->only('email'));
+
+        return $status === Password::RESET_LINK_SENT
+            ? response()->message('Reset link sent')
+            : response()->message($status, 422);
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $status = $this->authService->resetPassword(
+            $request->only('email', 'password', 'password_confirmation', 'token')
+        );
+
+        return $status == Password::PASSWORD_RESET
+            ? response()->message('Password reset')
+            : response()->message($status, 422);
     }
 
     public function redirectToProvider(string $provider)

@@ -74,6 +74,9 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
     });
 });
 
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
+
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('{category:slug}', [CategoryController::class, 'show']);

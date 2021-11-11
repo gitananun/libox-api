@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Auth\Events\PasswordReset;
 
 class AuthService
 {
@@ -32,6 +35,24 @@ class AuthService
     public function logout(): void
     {
         User::auth()->tokens()->delete();
+    }
+
+    public function forgotPassword(array $email): string
+    {
+        return Password::sendResetLink($email);
+    }
+
+    public function resetPassword(array $data): string
+    {
+        return Password::reset(
+            $data,
+            function (User $user, string $password) {
+                $user->forceFill(['password' => Hash::make($password)])->save();
+                $user->setRememberToken(Str::random(60));
+
+                event(new PasswordReset($user));
+            }
+        );
     }
 
     public function handleProviderCallback(string $provider): ?string
