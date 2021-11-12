@@ -29,7 +29,7 @@ class UserDeleted extends Notification
             ->line(__('mail.user_deleted.introduction'))
             ->action(__('mail.user_deleted.action'), url('/'))
             ->line(__('mail.user_deleted.gratitude', ['name' => $notifiable->name]))
-            ->salutation(__('mail.user_deleted.salutation'));
+            ->salutation(__('quotes')[array_rand(__('quotes'))]);
     }
 
     /**

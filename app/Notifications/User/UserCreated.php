@@ -29,6 +29,6 @@ class UserCreated extends Notification
             ->line(__('mail.user_created.introduction'))
             ->action(__('mail.user_created.action'), url('/'))
             ->line(__('mail.user_created.gratitude', ['name' => $notifiable->name]))
-            ->salutation(__('mail.user_created.salutation'));
+            ->salutation(__('quotes')[array_rand(__('quotes'))]);
     }
 }
