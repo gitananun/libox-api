@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
@@ -86,6 +87,10 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('{category:slug}', [CategoryController::class, 'show']);
+});
+
+Route::prefix('badges')->group(function () {
+    Route::get('/', [BadgeController::class, 'index']);
 });
 
 Route::prefix('courses')->group(function () {

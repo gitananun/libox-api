@@ -22,13 +22,21 @@ class CourseService
 
     public function store(array $data): void
     {
-        User::auth()->courses()->updateOrCreate($data)->categories()->sync($data['categories']);
+        $course = User::auth()->courses()->create($data);
+
+        $course->categories()->sync($data['categories']);
+        $course->badge_id = $data['badge_id'];
+
+        $course->save();
     }
 
     public function update(array $data, Course $course): void
     {
         $course->update($data);
+        $course->badge_id = $data['badge_id'];
         $course->categories()->sync($data['categories']);
+
+        $course->save();
     }
 
     public function delete(Course $course): void
