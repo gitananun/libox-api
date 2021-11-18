@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\StatisticableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, StatisticableTrait;
 
     protected $fillable = [
         'name',

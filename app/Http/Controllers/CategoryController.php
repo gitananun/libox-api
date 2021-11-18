@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Statistic;
 use App\Services\CategoryService;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CategoryResource;
@@ -25,6 +26,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
+        Category::incrementRecord($category->id, Statistic::CATEGORY_TYPE);
+
         return response()->success(new PaginatorResource(
             CourseResource::class,
             $this->categoryService->show($category)
