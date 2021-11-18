@@ -24,8 +24,6 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $this->authorize('is_admin');
-
         $this->postService->store($request->all());
 
         return response()->stored();
@@ -33,8 +31,6 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $this->authorize('is_admin');
-
         $this->postService->update($request->all(), $post);
 
         return response()->stored();
@@ -42,8 +38,6 @@ class PostController extends Controller
 
     public function delete(Post $post)
     {
-        $this->authorize('is_admin');
-
         $this->postService->delete($post);
 
         return response()->deleted();

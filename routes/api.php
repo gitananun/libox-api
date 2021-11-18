@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -69,7 +70,7 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
 
     });
 
-    Route::prefix('categories')->group(function () {
+    Route::prefix('categories')->middleware('can:is_admin')->group(function () {
         Route::post('/', [CategoryController::class, 'store']);
         Route::prefix('{category}')->group(function () {
             Route::put('/', [CategoryController::class, 'update']);
@@ -77,10 +78,14 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
         });
     });
 
-    Route::prefix('posts')->group(function () {
+    Route::prefix('posts')->middleware('can:is_admin')->group(function () {
         Route::post('/', [PostController::class, 'store']);
         Route::put('{post}', [PostController::class, 'update']);
         Route::delete('{post}', [PostController::class, 'delete']);
+    });
+
+    Route::prefix('statistics')->middleware('can:is_admin')->group(function () {
+        Route::get('/', [StatisticController::class, 'index']);
     });
 });
 

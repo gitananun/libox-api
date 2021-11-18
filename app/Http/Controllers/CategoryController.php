@@ -36,8 +36,6 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $this->authorize('is_admin');
-
         $this->categoryService->update($request->all(), $category);
 
         return response()->stored();
@@ -45,8 +43,6 @@ class CategoryController extends Controller
 
     public function delete(Category $category)
     {
-        $this->authorize('is_admin');
-
         $this->categoryService->delete($category);
 
         return response()->deleted();
@@ -54,8 +50,6 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $this->authorize('is_admin');
-
         $this->categoryService->store($request->all());
 
         return response()->stored();
