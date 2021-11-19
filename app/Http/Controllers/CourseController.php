@@ -28,18 +28,14 @@ class CourseController extends Controller
     {
         $this->authorize('email_verified');
 
-        $this->courseService->store($request->all());
-
-        return response()->stored();
+        return response()->success(new CourseResource($this->courseService->store($request->all())));
     }
 
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $this->authorize('update', $course);
 
-        $this->courseService->update($request->all(), $course);
-
-        return response()->stored();
+        return response()->success(new CourseResource($this->courseService->update($request->all(), $course)));
     }
 
     public function delete(Course $course)

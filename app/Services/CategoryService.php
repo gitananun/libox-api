@@ -17,9 +17,11 @@ class CategoryService
         return $category->courses()->paginate();
     }
 
-    public function update(array $data, Category $category): void
+    public function update(array $data, Category $category): Category
     {
         $category->update($data);
+
+        return $category;
     }
 
     public function delete(Category $category): void
@@ -27,8 +29,8 @@ class CategoryService
         $category->delete();
     }
 
-    public function store(array $data): void
+    public function store(array $data): Category
     {
-        Category::create($data);
+        return Category::create($data);
     }
 }

@@ -12,14 +12,16 @@ class PostService
         return Post::paginate();
     }
 
-    public function store(array $data): void
+    public function store(array $data): Post
     {
-        Post::updateOrCreate($data);
+        return Post::updateOrCreate($data);
     }
 
-    public function update(array $data, Post $post): void
+    public function update(array $data, Post $post): Post
     {
         $post->update($data);
+
+        return $post;
     }
 
     public function delete(Post $post): void

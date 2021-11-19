@@ -20,7 +20,7 @@ class CourseService
         return $this->getQuery()->paginate();
     }
 
-    public function store(array $data): void
+    public function store(array $data): Course
     {
         $course = User::auth()->courses()->create($data);
 
@@ -28,15 +28,19 @@ class CourseService
         $course->badge_id = $data['badge_id'];
 
         $course->save();
+
+        return $course;
     }
 
-    public function update(array $data, Course $course): void
+    public function update(array $data, Course $course): Course
     {
         $course->update($data);
         $course->badge_id = $data['badge_id'];
         $course->categories()->sync($data['categories']);
 
         $course->save();
+
+        return $course;
     }
 
     public function delete(Course $course): void

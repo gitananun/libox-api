@@ -36,9 +36,7 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $this->categoryService->update($request->all(), $category);
-
-        return response()->stored();
+        return response()->success(new CategoryResource($this->categoryService->update($request->all(), $category)));
     }
 
     public function delete(Category $category)
@@ -50,8 +48,6 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $this->categoryService->store($request->all());
-
-        return response()->stored();
+        return response()->success(new CategoryResource($this->categoryService->store($request->all())));
     }
 }

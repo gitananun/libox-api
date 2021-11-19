@@ -24,16 +24,12 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $this->postService->store($request->all());
-
-        return response()->stored();
+        return response()->success(new PostResource($this->postService->store($request->all())));
     }
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $this->postService->update($request->all(), $post);
-
-        return response()->stored();
+        return response()->success(new PostResource($this->postService->update($request->all(), $post)));
     }
 
     public function delete(Post $post)
