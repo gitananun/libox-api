@@ -15,4 +15,9 @@ return [
         'introduction' => 'We are happy to help you anytime to get your desired education.',
         'gratitude' => 'Thank you for choosing us dear :name',
     ],
+    'reported' => [
+        'subject' => 'Request Reported',
+        'greeting' => 'You just request a report. Please see the file under attachements.',
+        'gratitude' => 'Thank you for choosing us dear :name',
+    ],
 ];

@@ -19,7 +19,7 @@ class ProcessStatisticReport implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected LengthAwarePaginator $statistic)
+    public function __construct(protected LengthAwarePaginator $statistic, protected mixed $report)
     {}
 
     /**
@@ -29,6 +29,6 @@ class ProcessStatisticReport implements ShouldQueue
      */
     public function handle()
     {
-        event(new StatisticRequestedEvent($this->statistic));
+        event(new StatisticRequestedEvent($this->statistic, $this->report));
     }
 }

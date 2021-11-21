@@ -11,6 +11,6 @@ class StatisticRequestedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(public LengthAwarePaginator $statistic)
+    public function __construct(public LengthAwarePaginator $statistic, public mixed $report = null)
     {}
 }

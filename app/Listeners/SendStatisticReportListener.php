@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Models\User;
-use App\Notifications\Statistic\StatisticReport;
+use App\Notifications\Statistic\StatisticReported;
 
 class SendStatisticReportListener
 {
@@ -15,6 +15,6 @@ class SendStatisticReportListener
      */
     public function handle($event)
     {
-        User::auth()->notify(new StatisticReport($event->statistic));
+        User::auth()->notify(new StatisticReported($event->statistic, $event->report));
     }
 }
