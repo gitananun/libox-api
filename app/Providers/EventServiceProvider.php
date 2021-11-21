@@ -11,6 +11,8 @@ use App\Observers\UserObserver;
 use App\Observers\CourseObserver;
 use App\Observers\CategoryObserver;
 use Illuminate\Auth\Events\Registered;
+use App\Events\StatisticRequestedEvent;
+use App\Listeners\SendStatisticReportListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -24,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        StatisticRequestedEvent::class => [
+            SendStatisticReportListener::class,
         ],
     ];
 
