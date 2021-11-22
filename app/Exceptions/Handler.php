@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use function PHPSTORM_META\type;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -26,6 +28,26 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+
+    public function render($request, Throwable $e)
+    {
+        if ($this->isHttpException($e)) {
+            if ($e->getStatusCode() == 404) {
+                return response()->message('Not Found', 404);
+            }
+        }
+
+        return parent::render($request, $e);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->message('Unauthenticated', 401);
+        }
+
+        return parent::render($request, $exception);
+    }
 
     /**
      * Register the exception handling callbacks for the application.
