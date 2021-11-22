@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Jobs\ProcessUserNotification;
 use App\Notifications\User\UserCreated;
 use App\Notifications\User\UserDeleted;
 
@@ -16,7 +17,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->notify(new UserCreated);
+        ProcessUserNotification::dispatch($user, new UserCreated);
     }
 
     /**
@@ -27,6 +28,6 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        $user->notify(new UserDeleted);
+        ProcessUserNotification::dispatch($user, new UserDeleted);
     }
 }
