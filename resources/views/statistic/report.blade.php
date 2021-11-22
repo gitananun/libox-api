@@ -4,7 +4,7 @@
     <table class="pure-table pure-table-bordered">
         <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Type</th>
                 <th>Record</th>
                 <th>Statisticable</th>

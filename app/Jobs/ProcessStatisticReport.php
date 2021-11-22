@@ -2,33 +2,35 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\App;
 use Illuminate\Queue\SerializesModels;
-use App\Events\StatisticRequestedEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Notifications\Statistic\StatisticReported;
 
 class ProcessStatisticReport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(protected LengthAwarePaginator $statistic, protected mixed $report)
+    public function __construct(protected LengthAwarePaginator $statistic)
     {}
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+    private function makeReport(Collection $statistic)
+    {
+        return App::make('\Barryvdh\DomPDF\PDF')->loadView('statistic.report', ['stats' => $statistic]);
+    }
+
     public function handle()
     {
-        event(new StatisticRequestedEvent($this->statistic, $this->report));
+        User::auth()->notify(new StatisticReported(
+            $this->statistic,
+            $this->makeReport($this->statistic->getCollection())->download()
+        ));
     }
+
 }
