@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
@@ -109,3 +110,5 @@ Route::prefix('posts')->group(function () {
     Route::get('search/{title}', [PostController::class, 'search']);
     Route::get('{post:slug}', [PostController::class, 'show']);
 });
+
+Route::any('ping', [Controller::class, 'ping']);
