@@ -23,7 +23,7 @@ class CourseResource extends JsonResource
             "length" => $this->length,
             "language" => $this->language,
             "likes" => $this->likes,
-            "description" => $this->language,
+            "description" => $this->description,
             "last_updated" => $this->last_updated,
             "badge" => $this->badge->name ?? null,
             "created_at" => $this->created_at,
