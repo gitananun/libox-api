@@ -28,6 +28,8 @@ class Course extends Model
         'last_updated',
     ];
 
+    protected $with = ['instructors'];
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
@@ -36,5 +38,10 @@ class Course extends Model
     public function badge(): BelongsTo
     {
         return $this->belongsTo(Badge::class);
+    }
+
+    public function instructors(): BelongsToMany
+    {
+        return $this->belongsToMany(Instructor::class);
     }
 }
