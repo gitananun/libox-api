@@ -9,6 +9,7 @@ use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -109,6 +110,11 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index']);
     Route::get('search/{title}', [PostController::class, 'search']);
     Route::get('{post:slug}', [PostController::class, 'show']);
+});
+
+Route::prefix('instructors')->group(function () {
+    Route::get('/', [InstructorController::class, 'index']);
+    Route::get('search/{name}', [InstructorController::class, 'search']);
 });
 
 Route::any('ping', [Controller::class, 'ping']);
