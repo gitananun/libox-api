@@ -25,6 +25,7 @@ class CourseService
         $course = User::auth()->courses()->create($data);
 
         $course->categories()->sync($data['categories']);
+        $course->instructors()->sync($data['instructors']);
         $course->badge_id = $data['badge_id'];
 
         $course->save();
@@ -37,6 +38,7 @@ class CourseService
         $course->update($data);
         $course->badge_id = $data['badge_id'];
         $course->categories()->sync($data['categories']);
+        $course->instructors()->sync($data['instructors']);
 
         $course->save();
 
