@@ -17,7 +17,7 @@ class CreateInstructorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('lastname');
-            $table->string('job_title');
+            $table->string('job_title')->nullable();
             $table->timestamps();
         });
     }
