@@ -36,7 +36,7 @@ class Course extends Model
         'certification' => 'boolean',
     ];
 
-    protected $with = ['instructors', 'statistic'];
+    protected $with = ['instructors', 'statistic', 'categories'];
 
     public function categories(): BelongsToMany
     {
