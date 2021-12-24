@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\StatisticableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,8 +22,9 @@ class Course extends Model
         'language',
         'likes',
         'description',
-        'last_updated',
         'image_path',
+        'lessons',
+        'last_updated',
     ];
 
     protected $dates = [
@@ -30,7 +32,11 @@ class Course extends Model
         'last_updated',
     ];
 
-    protected $with = ['instructors'];
+    protected $casts = [
+        'certification' => 'boolean',
+    ];
+
+    protected $with = ['instructors', 'statistic'];
 
     public function categories(): BelongsToMany
     {
@@ -45,5 +51,10 @@ class Course extends Model
     public function instructors(): BelongsToMany
     {
         return $this->belongsToMany(Instructor::class);
+    }
+
+    public function statistic(): HasOne
+    {
+        return $this->hasOne(Statistic::class, 'statisticable_id', 'id');
     }
 }

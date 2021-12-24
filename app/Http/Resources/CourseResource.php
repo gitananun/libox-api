@@ -27,8 +27,11 @@ class CourseResource extends JsonResource
             "last_updated" => $this->last_updated,
             "badge" => $this->badge->name ?? null,
             "created_at" => $this->created_at,
+            "lessons" => $this->lessons,
+            "certification" => $this->certification,
             "instructors" => InstructorResource::collection($this->instructors),
             "image_path" => $this->image_path,
+            "viewers" => $this->statistic ? $this->statistic->record : null,
         ];
     }
 }

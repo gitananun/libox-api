@@ -23,6 +23,9 @@ class UpdateCourseRequest extends FormRequest
             'description' => 'nullable|min:20',
             'last_updated' => 'nullable|date',
             'language' => ['nullable', new LanguageCode],
+            'image' => 'mimes:jpg,png,jpeg|max:5048',
+            'lessons' => 'nullable|int|min:0|max:999',
+            'certification' => 'nullable|boolean',
 
             'categories' => 'present|array|distinct',
             'categories.*' => 'int|exists:categories,id',

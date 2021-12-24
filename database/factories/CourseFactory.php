@@ -33,6 +33,9 @@ class CourseFactory extends Factory
             'last_updated' => $this->faker->dateTime(),
             'likes' => $this->faker->numberBetween(0, 300),
             'user_id' => User::factory()->create()->id,
+            'certification' => $this->faker->boolean(),
+            'lessons' => $this->faker->numberBetween(1, 999),
+            'image_path' => $this->faker->imageUrl(),
         ];
     }
 }
