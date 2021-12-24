@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Statistic;
+use Illuminate\Support\Str;
 use App\Services\CourseService;
 use App\Http\Resources\CourseResource;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Resources\PaginatorResource;
 use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\RemoveFavoritesRequest;
 use App\Http\Requests\UpdateFavoritesRequest;
 
@@ -15,6 +18,14 @@ class CourseController extends Controller
 {
     public function __construct(private CourseService $courseService)
     {}
+
+    private function storeGetDataWithImagePath(FormRequest $request): array
+    {
+        $image = $request->file('image');
+        $name = time() . '-' . Str::slug($request->title) . '.' . $image->extension();
+
+        return [...$request->except('image'), 'image_path' => $image->storePubliclyAs('images', $name, 'public')];
+    }
 
     public function index()
     {
@@ -28,14 +39,18 @@ class CourseController extends Controller
     {
         $this->authorize('email_verified');
 
-        return response()->success(new CourseResource($this->courseService->store($request->all())));
+        return response()->success(new CourseResource(
+            $this->courseService->store($this->storeGetDataWithImagePath($request))
+        ));
     }
 
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $this->authorize('update', $course);
 
-        return response()->success(new CourseResource($this->courseService->update($request->all(), $course)));
+        return response()->success(new CourseResource(
+            $this->courseService->update($this->storeGetDataWithImagePath($request), $course)
+        ));
     }
 
     public function delete(Course $course)
@@ -49,6 +64,8 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
+        Course::incrementRecord($course->id, Statistic::COURSE_TYPE);
+
         return response()->success(new CourseResource($course));
     }
 

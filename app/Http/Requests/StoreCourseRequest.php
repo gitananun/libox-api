@@ -23,6 +23,7 @@ class StoreCourseRequest extends FormRequest
             'description' => 'required|min:20',
             'last_updated' => 'nullable|date',
             'language' => ['required', new LanguageCode],
+            'image' => 'mimes:jpg,png,jpeg|max:5048',
 
             'categories' => 'present|array|distinct',
             'categories.*' => 'int|exists:categories,id',

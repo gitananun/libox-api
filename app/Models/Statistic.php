@@ -10,8 +10,9 @@ class Statistic extends Model
     use HasFactory;
 
     const CATEGORY_TYPE = "CATEGORY";
+    const COURSE_TYPE = "COURSE";
 
-    const TYPES = [Statistic::CATEGORY_TYPE];
+    const TYPES = [Statistic::CATEGORY_TYPE, Statistic::COURSE_TYPE];
 
     protected $fillable = [
         'type',

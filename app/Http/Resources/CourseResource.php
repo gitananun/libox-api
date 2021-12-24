@@ -28,6 +28,7 @@ class CourseResource extends JsonResource
             "badge" => $this->badge->name ?? null,
             "created_at" => $this->created_at,
             "instructors" => InstructorResource::collection($this->instructors),
+            "image_path" => $this->image_path,
         ];
     }
 }
