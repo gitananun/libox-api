@@ -31,10 +31,13 @@ class CourseController extends Controller
     public function index()
     {
         $scope = request()->scope;
-        $rule = new CourseScope($scope);
 
-        if (!$rule->passes('scope')) {
-            return response()->message($rule->message());
+        if ($scope) {
+            $rule = new CourseScope($scope);
+
+            if (!$rule->passes('scope')) {
+                return response()->message($rule->message(), 422);
+            }
         }
 
         return response()->success(new PaginatorResource(

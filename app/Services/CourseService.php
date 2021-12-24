@@ -12,7 +12,9 @@ class CourseService
 {
     private function getQuery(?string $scope = null): Builder | HasMany
     {
-        return ($auth = User::auth()) ? $auth->courses()->$scope() : Course::query()->$scope();
+        return ($auth = User::auth())
+            ? ($scope ? $auth->courses()->$scope() : $auth->courses())
+            : ($scope ? Course::query()->$scope() : Course::query());
     }
 
     public function index(?string $scope): LengthAwarePaginator
