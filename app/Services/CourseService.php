@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CourseService
 {
-    private function getQuery(): Builder | HasMany
+    private function getQuery(?string $scope = null): Builder | HasMany
     {
-        return ($auth = User::auth()) ? $auth->courses() : Course::query();
+        return ($auth = User::auth()) ? $auth->courses()->$scope() : Course::query()->$scope();
     }
 
-    public function index(): LengthAwarePaginator
+    public function index(?string $scope): LengthAwarePaginator
     {
-        return $this->getQuery()->paginate();
+        return $this->getQuery($scope)->paginate();
     }
 
     public function store(array $data): Course

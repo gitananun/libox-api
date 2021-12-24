@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\StatisticableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,4 +58,13 @@ class Course extends Model
     {
         return $this->hasOne(Statistic::class, 'statisticable_id', 'id');
     }
+
+    public function scopePopular(Builder $query): Builder
+    {
+        return $query->where([
+            ['likes', '>', 30],
+            ['rating', '>', 3],
+        ]);
+    }
+
 }

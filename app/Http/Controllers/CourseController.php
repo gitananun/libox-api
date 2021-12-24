@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Statistic;
+use App\Rules\CourseScope;
 use Illuminate\Support\Str;
 use App\Services\CourseService;
 use App\Http\Resources\CourseResource;
@@ -29,9 +30,16 @@ class CourseController extends Controller
 
     public function index()
     {
+        $scope = request()->scope;
+        $rule = new CourseScope($scope);
+
+        if (!$rule->passes('scope')) {
+            return response()->message($rule->message());
+        }
+
         return response()->success(new PaginatorResource(
             CourseResource::class,
-            $this->courseService->index()
+            $this->courseService->index($scope)
         ));
     }
 
