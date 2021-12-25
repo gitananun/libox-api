@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Course;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CourseResource extends JsonResource
@@ -24,7 +25,6 @@ class CourseResource extends JsonResource
             "length" => $this->length,
             "lessons" => $this->lessons,
             "language" => $this->language,
-            "image_path" => $this->image_path,
             "created_at" => $this->created_at,
             "description" => $this->description,
             "last_updated" => $this->last_updated,
@@ -33,6 +33,7 @@ class CourseResource extends JsonResource
             "viewers" => $this->statistic ? $this->statistic->record : null,
             "categories" => CategoryResource::collection($this->categories),
             "instructors" => InstructorResource::collection($this->instructors),
+            "image_path" => $this->image_path ?? 'images/' . Course::DEFAULT_IMG_NAME,
         ];
     }
 }

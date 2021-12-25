@@ -14,6 +14,8 @@ class Course extends Model
 {
     use HasFactory, StatisticableTrait;
 
+    const DEFAULT_IMG_NAME = "default-course.png";
+
     protected $fillable = [
         'title',
         'rating',

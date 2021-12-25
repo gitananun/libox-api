@@ -35,7 +35,6 @@ class CourseFactory extends Factory
             'user_id' => User::factory()->create()->id,
             'certification' => $this->faker->boolean(),
             'lessons' => $this->faker->numberBetween(1, 999),
-            'image_path' => $this->faker->imageUrl(),
         ];
     }
 }
