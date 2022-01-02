@@ -4,15 +4,20 @@ namespace App\Notifications\Course;
 
 use App\Models\Course;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Notifications\AbstractDatabaseNotification;
 
-class CourseCreated extends Notification
+class CourseCreated extends AbstractDatabaseNotification
 {
     use Queueable;
 
     public function __construct(private Course $course)
     {}
+
+    public function getTitle(): string
+    {
+        return __('mail.course_created.title', ['name' => $this->course->title]);
+    }
 
     public function via(): array
     {
@@ -39,6 +44,7 @@ class CourseCreated extends Notification
     public function toDatabase($notifiable)
     {
         return [
+            'title' => $this->getTitle(),
             'course' => [
                 "title" => $this->course->title,
             ],

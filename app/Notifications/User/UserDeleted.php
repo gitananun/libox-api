@@ -3,12 +3,17 @@
 namespace App\Notifications\User;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Notifications\AbstractDatabaseNotification;
 
-class UserDeleted extends Notification
+class UserDeleted extends AbstractDatabaseNotification
 {
     use Queueable;
+
+    public function getTitle(): string
+    {
+        return __('mail.user_deleted.title');
+    }
 
     public function __construct()
     {}
@@ -32,11 +37,10 @@ class UserDeleted extends Notification
             ->salutation(__('quotes')[array_rand(__('quotes'))]);
     }
 
-    /**
-     * @param \App\Models\User $notifiable
-     */
     public function toDatabase($notifiable)
     {
-        return [];
+        return [
+            'title' => $this->getTitle(),
+        ];
     }
 }

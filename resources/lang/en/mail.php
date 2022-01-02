@@ -9,6 +9,7 @@ return [
         'gratitude' => 'Thank you for choosing us dear :name.',
     ],
     'user_deleted' => [
+        'title' => 'You just deleted your account',
         'subject' => 'Account Deleted',
         'greeting' => 'You just deleted your account from our library. Please participate to survey. Your feedback is very important to us.',
         'action' => "Go to Survey",
@@ -21,6 +22,7 @@ return [
         'gratitude' => 'Thank you for choosing us dear :name',
     ],
     'course_created' => [
+        'title' => "You've created :name course",
         'subject' => 'New Course by you',
         'greeting' => 'Welcome to Libox!',
         'action' => "Go to library",
