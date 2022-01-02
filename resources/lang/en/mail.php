@@ -20,4 +20,11 @@ return [
         'greeting' => 'You just request a report. Please see the file under attachements.',
         'gratitude' => 'Thank you for choosing us dear :name',
     ],
+    'course_created' => [
+        'subject' => 'New Course by you',
+        'greeting' => 'Welcome to Libox!',
+        'action' => "Go to library",
+        'introduction' => 'You have just promoted a :name to our library!',
+        'gratitude' => 'Thank you for choosing us dear :name.',
+    ],
 ];

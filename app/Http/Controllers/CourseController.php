@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Statistic;
 use App\Rules\CourseScope;
@@ -11,6 +12,7 @@ use App\Http\Resources\CourseResource;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Resources\PaginatorResource;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Notifications\Course\CourseCreated;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\RemoveFavoritesRequest;
 use App\Http\Requests\UpdateFavoritesRequest;
@@ -50,9 +52,11 @@ class CourseController extends Controller
     {
         $this->authorize('email_verified');
 
-        return response()->success(new CourseResource(
-            $this->courseService->store($this->storeGetDataWithImagePath($request))
-        ));
+        $course = $this->courseService->store($this->storeGetDataWithImagePath($request));
+
+        User::auth()->notify(new CourseCreated($course));
+
+        return response()->success(new CourseResource($course));
     }
 
     public function update(UpdateCourseRequest $request, Course $course)
