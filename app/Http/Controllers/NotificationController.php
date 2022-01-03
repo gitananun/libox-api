@@ -28,4 +28,11 @@ class NotificationController extends Controller
 
         return response()->stored();
     }
+
+    public function readAll()
+    {
+        $this->notificationService->readAll();
+
+        return response()->stored();
+    }
 }

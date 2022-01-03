@@ -19,4 +19,11 @@ class NotificationService
     {
         $notification->markAsRead();
     }
+
+    public function readAll(): void
+    {
+        $user = User::auth();
+
+        $user->unreadNotifications->markAsRead();
+    }
 }

@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::prefix('notifications')->group(function () {
             Route::get('/', [NotificationController::class, 'index']);
+            Route::put('/', [NotificationController::class, 'readAll']);
             Route::get('{notification}', [NotificationController::class, 'read']);
         });
         Route::delete('/', [UserController::class, 'delete']);
