@@ -55,7 +55,6 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
     Route::prefix('courses')->group(function () {
         Route::get('/', [CourseController::class, 'index']);
         Route::post('/', [CourseController::class, 'store']);
-        Route::post('search/{title}', [CourseController::class, 'search']);
 
         Route::prefix('favorites')->group(function () {
             Route::get('/', [CourseController::class, 'indexFavorites']);
@@ -103,7 +102,7 @@ Route::prefix('badges')->group(function () {
 
 Route::prefix('courses')->group(function () {
     Route::get('/', [CourseController::class, 'index']);
-    Route::get('search/{title}', [CourseController::class, 'search']);
+    Route::post('search/{title}', [CourseController::class, 'search']);
     Route::get('{course:slug}', [CourseController::class, 'show']);
 });
 
