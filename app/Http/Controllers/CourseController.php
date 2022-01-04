@@ -11,6 +11,7 @@ use App\Services\CourseService;
 use App\Http\Resources\CourseResource;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Resources\PaginatorResource;
+use App\Http\Requests\SearchCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Notifications\Course\CourseCreated;
 use Illuminate\Foundation\Http\FormRequest;
@@ -84,10 +85,10 @@ class CourseController extends Controller
         return response()->success(new CourseResource($course));
     }
 
-    public function search(string $title)
+    public function search(SearchCourseRequest $request, string $title)
     {
         return response()->success(new PaginatorResource(
-            CourseResource::class, $this->courseService->search($title)
+            CourseResource::class, $this->courseService->search($title, $request->category)
         ));
     }
 

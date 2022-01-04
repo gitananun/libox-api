@@ -52,9 +52,14 @@ class CourseService
         $course->delete();
     }
 
-    public function search(string $title): LengthAwarePaginator
+    public function search(string $title, ?int $category): LengthAwarePaginator
     {
-        return $this->getQuery()->where('title', 'LIKE', '%' . $title . '%')->paginate();
+        return $this->getQuery()
+            ->where('title', 'LIKE', '%' . $title . '%')
+            ->when($category, function ($query) use ($category) {
+                $query->whereHas('categories', fn($q) => $q->where('categories.id', $category));
+            })
+            ->paginate();
     }
 
     public function like(Course $course): void
