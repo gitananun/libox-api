@@ -30,7 +30,7 @@ class StoreCourseRequest extends FormRequest
             'categories' => 'present|array|distinct',
             'categories.*' => 'int|exists:categories,id',
 
-            'instructors' => 'present|array|distinct',
+            'instructors' => 'nullable|array|distinct',
             'instructors.*' => 'int|exists:instructors,id',
         ];
     }
