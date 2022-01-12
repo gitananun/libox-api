@@ -27,7 +27,11 @@ class CourseService
         $course = User::auth()->courses()->create($data);
 
         $course->categories()->sync($data['categories']);
-        $course->instructors()->sync($data['instructors']);
+
+        if (array_key_exists('instructors', $data)) {
+            $course->instructors()->sync($data['instructors']);
+        }
+
         $course->badge_id = $data['badge_id'];
 
         $course->save();
