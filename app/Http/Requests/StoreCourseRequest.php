@@ -23,7 +23,7 @@ class StoreCourseRequest extends FormRequest
             'description' => 'required|min:20',
             'last_updated' => 'nullable|date',
             'language' => ['required', new LanguageCode],
-            'image' => 'mimes:jpg,png,jpeg|max:5048',
+            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
             'lessons' => 'nullable|int|min:0|max:999',
             'certification' => 'nullable|boolean',
 

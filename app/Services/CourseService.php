@@ -17,6 +17,19 @@ class CourseService
             : ($scope ? Course::query()->$scope() : Course::query());
     }
 
+    private function setRelations(array $data, Course $course): void
+    {
+        $course->categories()->sync($data['categories']);
+
+        if (array_key_exists('instructors', $data)) {
+            $course->instructors()->sync($data['instructors']);
+        }
+
+        if (array_key_exists('badge_id', $data)) {
+            $course->badge_id = $data['badge_id'];
+        }
+    }
+
     public function index(?string $scope): LengthAwarePaginator
     {
         return $this->getQuery($scope)->paginate();
@@ -26,13 +39,7 @@ class CourseService
     {
         $course = User::auth()->courses()->create($data);
 
-        $course->categories()->sync($data['categories']);
-
-        if (array_key_exists('instructors', $data)) {
-            $course->instructors()->sync($data['instructors']);
-        }
-
-        $course->badge_id = $data['badge_id'];
+        $this->setRelations($data, $course);
 
         $course->save();
 
@@ -42,9 +49,8 @@ class CourseService
     public function update(array $data, Course $course): Course
     {
         $course->update($data);
-        $course->badge_id = $data['badge_id'];
-        $course->categories()->sync($data['categories']);
-        $course->instructors()->sync($data['instructors']);
+
+        $this->setRelations($data, $course);
 
         $course->save();
 
