@@ -27,6 +27,7 @@ class Course extends Model
         'description',
         'image_path',
         'lessons',
+        'certification',
         'last_updated',
     ];
 
@@ -40,6 +41,11 @@ class Course extends Model
     ];
 
     protected $with = ['instructors', 'statistic', 'categories'];
+
+    public function setCertificationAttribute($value): void
+    {
+        $this->attributes['certification'] = $value === 'true' ? true : false;
+    }
 
     public function categories(): BelongsToMany
     {

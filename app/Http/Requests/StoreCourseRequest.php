@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\LanguageCode;
+use App\Rules\StringBoolean;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCourseRequest extends FormRequest
@@ -25,7 +26,7 @@ class StoreCourseRequest extends FormRequest
             'language' => ['required', new LanguageCode],
             'image' => 'required|mimes:jpg,png,jpeg|max:5048',
             'lessons' => 'nullable|int|min:0|max:999',
-            'certification' => 'nullable|boolean',
+            'certification' => ['nullable', new StringBoolean],
 
             'categories' => 'present|array|distinct',
             'categories.*' => 'int|exists:categories,id',
