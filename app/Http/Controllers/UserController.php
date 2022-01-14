@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\UserService;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\IndexUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\PaginatorResource;
 
 class UserController extends Controller
@@ -20,6 +21,13 @@ class UserController extends Controller
             UserResource::class,
             $this->userService->index($request->role),
         ));
+    }
+
+    public function update(UpdateUserRequest $request)
+    {
+        $user = $this->userService->update($request->all());
+
+        return response()->success(new UserResource($user));
     }
 
     public function delete()

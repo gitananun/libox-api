@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
+        Route::put('/', [UserController::class, 'update']);
         Route::prefix('notifications')->group(function () {
             Route::get('/', [NotificationController::class, 'index']);
             Route::put('/', [NotificationController::class, 'readAll']);
