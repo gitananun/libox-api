@@ -10,6 +10,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -116,6 +117,10 @@ Route::prefix('posts')->group(function () {
 Route::prefix('instructors')->group(function () {
     Route::get('/', [InstructorController::class, 'index']);
     Route::get('search/{name}', [InstructorController::class, 'search']);
+});
+
+Route::prefix('newsletters')->group(function () {
+    Route::post('subscribe', [NewsletterController::class, 'subscribe']);
 });
 
 Route::any('ping', [Controller::class, 'ping']);

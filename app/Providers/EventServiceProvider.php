@@ -6,10 +6,12 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\Newsletter;
 use App\Observers\PostObserver;
 use App\Observers\UserObserver;
 use App\Observers\CourseObserver;
 use App\Observers\CategoryObserver;
+use App\Observers\NewsletterObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -38,5 +40,6 @@ class EventServiceProvider extends ServiceProvider
         Post::observe(PostObserver::class);
         Course::observe(CourseObserver::class);
         Category::observe(CategoryObserver::class);
+        Newsletter::observe(NewsletterObserver::class);
     }
 }

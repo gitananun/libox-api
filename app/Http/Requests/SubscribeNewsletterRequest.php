@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginAuthRequest extends FormRequest
+class SubscribeNewsletterRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +14,7 @@ class LoginAuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|string|min:6',
-            'email' => 'required|email|max:255|exists:users',
+            'email' => 'required|email',
         ];
     }
 }
