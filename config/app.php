@@ -234,6 +234,7 @@ return [
          * Package Aliases...
          */
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
 
     ],
 

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use Location;
 use App\Models\Newsletter;
 
 class NewsletterObserver
@@ -14,6 +15,8 @@ class NewsletterObserver
      */
     public function creating(Newsletter $newsletter)
     {
-        $newsletter->country = 'Armenia';
+        if ($position = Location::get()) {
+            $newsletter->country = $position->countryName;
+        }
     }
 }
