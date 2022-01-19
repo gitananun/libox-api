@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Enums\CourseStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -100,6 +101,7 @@ class CourseService
     public function publish(Course $course): Course
     {
         $course->published_at = now();
+        $course->status = CourseStatus::PUBLISHED;
         $course->save();
 
         return $course;

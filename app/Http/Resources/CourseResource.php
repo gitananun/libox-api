@@ -23,6 +23,7 @@ class CourseResource extends JsonResource
             "likes" => $this->likes,
             "rating" => $this->rating,
             "length" => $this->length,
+            "status" => $this->status,
             "lessons" => $this->lessons,
             "language" => $this->language,
             "created_at" => $this->created_at,
