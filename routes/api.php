@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
         Route::prefix('{course}')->group(function () {
             Route::put('/', [CourseController::class, 'update']);
             Route::put('like', [CourseController::class, 'like']);
+            Route::put('publish', [CourseController::class, 'publish']);
             Route::put('dislike', [CourseController::class, 'dislike']);
             Route::delete('/', [CourseController::class, 'delete']);
         });

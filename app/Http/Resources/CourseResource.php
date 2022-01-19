@@ -34,6 +34,8 @@ class CourseResource extends JsonResource
             "categories" => CategoryResource::collection($this->categories),
             "instructors" => InstructorResource::collection($this->instructors),
             "image_path" => $this->image_path ?? 'images/' . Course::DEFAULT_IMG_NAME,
+
+            "published_at" => $this->published_at,
         ];
     }
 }

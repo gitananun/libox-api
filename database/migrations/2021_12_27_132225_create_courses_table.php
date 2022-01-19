@@ -28,6 +28,7 @@ class CreateCoursesTable extends Migration
             $table->string('image_path')->nullable();
             $table->string('status')->default('draft');
             $table->timestamp('last_updated')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

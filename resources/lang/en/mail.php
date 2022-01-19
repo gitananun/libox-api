@@ -22,11 +22,19 @@ return [
         'gratitude' => 'Thank you for choosing us dear :name',
     ],
     'course_created' => [
-        'title' => "You've created :name course",
+        'title' => 'You\'ve created :name course',
         'subject' => 'New Course by you',
         'greeting' => 'Welcome to Libox!',
-        'action' => "Go to library",
-        'introduction' => 'You have just promoted a :name to our library!',
+        'action' => 'Go to library',
+        'introduction' => 'You have just promoted a :name to our library! We will review and right back to you!',
         'gratitude' => 'Thank you for choosing us dear :name.',
+    ],
+    'course_submitted' => [
+        'title' => 'New library request',
+        'subject' => 'New Course Request by :name',
+        'greeting' => 'Welcome to Libox Management!',
+        'action' => 'Go to library',
+        'introduction' => 'Just library got a request of :name course! We must review as fast as we can and right to :email back!',
+        'gratitude' => 'Thank you for choosing our management system dear :name.',
     ],
 ];

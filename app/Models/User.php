@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,5 +63,10 @@ class User extends Authenticatable implements CanResetPassword
     public function favoriteCourses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class, 'favorite_courses')->withTimestamps();
+    }
+
+    public function scopeAdmin(Builder $query): Builder
+    {
+        return $query->where('role', $this::ROLE_ADMIN);
     }
 }

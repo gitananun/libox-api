@@ -34,7 +34,9 @@ class Course extends Model
 
     protected $dates = [
         'created_at',
+        'updated_at',
         'last_updated',
+        'published_at',
     ];
 
     protected $casts = [

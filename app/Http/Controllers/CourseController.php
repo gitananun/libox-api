@@ -15,8 +15,10 @@ use App\Http\Requests\SearchCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Notifications\Course\CourseCreated;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\RemoveFavoritesRequest;
 use App\Http\Requests\UpdateFavoritesRequest;
+use App\Notifications\Course\CourseSubmitted;
 
 class CourseController extends Controller
 {
@@ -56,6 +58,8 @@ class CourseController extends Controller
         $course = $this->courseService->store($this->storeGetDataWithImagePath($request));
 
         User::auth()->notify(new CourseCreated($course));
+
+        Notification::send(User::admin()->get(), new CourseSubmitted($course));
 
         return response()->success(new CourseResource($course));
     }
@@ -126,5 +130,12 @@ class CourseController extends Controller
         $this->courseService->removeFavorites($request->course_id);
 
         return response()->deleted();
+    }
+
+    public function publish(Course $course)
+    {
+        $this->authorize('is_admin');
+
+        return response()->success(new CourseResource($this->courseService->publish($course)));
     }
 }

@@ -96,4 +96,12 @@ class CourseService
     {
         User::auth()->favoriteCourses()->detach([$courseId]);
     }
+
+    public function publish(Course $course): Course
+    {
+        $course->published_at = now();
+        $course->save();
+
+        return $course;
+    }
 }
