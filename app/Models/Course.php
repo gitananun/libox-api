@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CourseStatus;
 use App\Traits\StatisticableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -73,6 +74,11 @@ class Course extends Model
             ['likes', '>', 30],
             ['rating', '>', 3],
         ]);
+    }
+
+    public function scopeDraft(Builder $query): Builder
+    {
+        return $query->where('status', CourseStatus::DRAFT);
     }
 
 }

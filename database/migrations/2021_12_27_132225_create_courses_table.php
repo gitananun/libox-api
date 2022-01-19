@@ -23,10 +23,11 @@ class CreateCoursesTable extends Migration
             $table->string('language');
             $table->text('description');
             $table->integer('likes')->default(0);
-            $table->timestamp('last_updated')->nullable();
             $table->integer('lessons')->nullable();
             $table->boolean('certification')->default(false);
             $table->string('image_path')->nullable();
+            $table->string('status')->default('draft');
+            $table->timestamp('last_updated')->nullable();
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
