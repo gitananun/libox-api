@@ -15,7 +15,7 @@ class CourseService
     {
         return ($auth = User::auth())
             ? ($scope ? $auth->courses()->$scope() : $auth->courses())
-            : ($scope ? Course::query()->$scope() : Course::query());
+            : ($scope ? Course::query()->published()->$scope() : Course::query()->published());
     }
 
     private function setRelations(array $data, Course $course): void

@@ -83,4 +83,8 @@ class Course extends Model
         return $query->where('status', CourseStatus::DRAFT);
     }
 
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->whereNotNull('published_at')->where(['status' => CourseStatus::PUBLISHED]);
+    }
 }
