@@ -18,7 +18,7 @@ User can manage own the courses, and personal information. Can change the passwo
 User can get the notifications related to course creation with pending status for example, account creation and delete, password change and etc..
 
 ## Two examples of Models
----
+
 ### User
 - name - `required|string|max:255`
 - lastname - `required|string|max:255`
@@ -47,7 +47,7 @@ User can get the notifications related to course creation with pending status fo
 - published_at
 
 ### Relations
----
+
 ##### User
 - Has many courses
 - Has many providers
