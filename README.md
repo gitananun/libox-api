@@ -8,5 +8,3 @@
 </p>
 
 ## Libox
-
-Libox is my first startup.
